@@ -20,8 +20,8 @@
                         
                         <li class="list-group-item">
                             <h3>Family: {{ $families->famname }}</h3>
-                            <a href="/users/{{ $families->id }}/familyedit" class="btn btn-default btn-sm pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            Edit {{ $families->famname }} </a>
+                            <!--<a href="/users/{{ $families->id }}/familyedit" class="btn btn-default btn-sm pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>-->
+                            <!--Edit {{ $families->famname }} </a>-->
                             
                            <p>{{ $families->phone }}</p> 
                            <p>{{ $families->email }}</p>

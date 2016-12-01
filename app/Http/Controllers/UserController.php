@@ -24,11 +24,13 @@ class UserController extends Controller
             'gender' => 'required',
             'birthdate' => 'required'
         ]);
+        //$dob = date('Y-m-d', strtotime($request->birthdate));
         $players = new Players;
         $players->fname = $request->fname;
         $players->lname = $request->lname;
         $players->gender = $request->gender;
         $players->birthdate = $request->birthdate;
+        //$players->birthdate = $dob;
         
         if($families->players()->save($players)){
             return back()->with(['success' => 'Family member successfully added.']);

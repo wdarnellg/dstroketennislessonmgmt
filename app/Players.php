@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Players extends Model
 {
@@ -27,4 +28,9 @@ class Players extends Model
     }
     
     protected $dates = ['birthdate'];
+    
+    public function setBirthdateAttribute($value)
+    {
+        $this->attributes['birthdate'] = Carbon::createFromFormat('m/d/Y', $value);
+    }
 }
