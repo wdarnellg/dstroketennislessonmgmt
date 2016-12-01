@@ -10,6 +10,9 @@ use App\Players;
 use App\Packages;
 use App\Lessonhours;
 use App\Hoursused;
+use Illuminate\Support\Facades\Event;
+use App\Events\MessageSent;
+use App\Events\DStrokeMail;
 
 class AdminController extends Controller
 {
@@ -151,7 +154,7 @@ class AdminController extends Controller
 
         if($players->lessonhours()->save($lessonhours)){
             
-            //Event::fire(new MessageSent($lessonhours));
+            Event::fire(new MessageSent($lessonhours));
             
             return back()->with(['success' => 'Player is enrolled in new Lesson Hour Session.']);
         } else {
@@ -172,7 +175,7 @@ class AdminController extends Controller
         $hoursused->comments = $request['comments'];
         
         if($lessonhours->hoursused()->save($hoursused)){
-            //Event::fire(new DStrokeMail($hoursused));
+            Event::fire(new DStrokeMail($hoursused));
                return back()->with(['success' => 'Hours Used successfully added!']); 
             } else {
                 return back()->with(['fail' => 'Something went wrong!']);

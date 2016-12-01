@@ -51,5 +51,7 @@
 
 //Accounts Routes/////////////////////////////////////////////////////////////////////////
     Route::get('/mylessonhours', 'PlayerController@getMyLessonhours')->middleware('auth');
-    Route::get('/mylessonhours/{lessonhours}', 'PlayerController@getMyHoursused')->middleware('auth'); 
+    Route::get('/mylessonhours/{lessonhours}', 'PlayerController@getMyHoursused')->middleware('auth');
+    Route::get('/myfamilyprofile', 'UserController@getMyFamilyProfile');
+    Route::post('/myfamilyprofile/{families}/players', 'UserController@storePlayer');
 //End Accounts Routes//////////////////////////////////////////////////////////////////////

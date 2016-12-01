@@ -17,7 +17,8 @@
             <li><a href="{{ url('/login') }}">Login</a></li>
             <li><a href="{{ url('/register') }}">Register</a></li>
         @else 
-            <li><a href="#">{{ Auth::user()->email }}</a></li>                    
+            <li><a href="#">{{ Auth::user()->email }}</a></li>
+            <li><a href="{{ url('myfamilyprofile') }}">My Family Profile</a></li>
             <li><a href="{{ url('mylessonhours') }}">My Packages</a></li>
             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
             <li><a href="{{ url('dashboard') }}">Admin</a></li>

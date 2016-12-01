@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Auth;
 use App\Players;
 use App\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class UserController extends Controller
     //     return view('admin.users.users', compact('users'));
     // }
     
-    public function storePlayer(Request $request, User $users)
+    public function storePlayer(Request $request, User $families)
     {
         $this->validate($request, [
             'fname' => 'required',
@@ -29,14 +30,18 @@ class UserController extends Controller
         $players->gender = $request->gender;
         $players->birthdate = $request->birthdate;
         
-        if($users->players()->save($players)){
-            return back()->with(['success' => 'Player successfully added.']);
+        if($families->players()->save($players)){
+            return back()->with(['success' => 'Family member successfully added.']);
         } else {
             return back()->with(['fail' => 'The attempt to save failed.']);
         }
     }
     
-
+    public function getMyFamilyProfile(User $families)
+    {
+        $families = User::where('id', '=', Auth::user()->id)->with('players')->first(); 
+        return view('auth.account.myfamilyprofile', compact('families'));
+    }
     
     public function edit(user $user)
     {
@@ -51,6 +56,7 @@ class UserController extends Controller
             return back()->with(['fail' => 'The attempt to edit failed.']);
         }
     }
+    
         
     
 }

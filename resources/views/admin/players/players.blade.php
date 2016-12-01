@@ -20,7 +20,7 @@
         @foreach($players as $player)
             <li class="list-group-item">
                 <a href="/players/{{ $player->id }}">{{ $player->getFullName($player->id) }}</a>
-                <a href="#" class="pull-right"> Number of Packages: {{ $player->lessonhours->count('players') }}</a><br>
+                <p> Number of Packages: {{ $player->lessonhours->count('players') }}</p><br>
                 
             </li>
         @endforeach

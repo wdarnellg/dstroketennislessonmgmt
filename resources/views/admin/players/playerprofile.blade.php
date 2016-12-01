@@ -42,6 +42,9 @@
                                                     <li class="list-group-item card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
                                                         Sign Up Date:<br>
                                                         {{ $hours->signup_date->format('m-d-Y') }}<br>
+                                                        <p class="pull-right">
+                                                            Hours Left: {{ $hours->packages->numberofhours - $hours->hoursused->sum('numberofhours') }}
+                                                        </p>
                                                         Lesson Package Type:<br>
                                                         {{ $hours->packages->name }}<br>
                                                     </li>

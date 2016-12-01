@@ -45,11 +45,7 @@ class PlayerController extends Controller
     
     public function getMyHoursused(Lessonhours $lessonhours, Hoursused $hoursused)
     {
-        //$lessonhours = Lessonhours::with(['packages', 'hoursused' => f 
-        //$hoursused = Hoursused::all();
-       // dd($lessonhours);
         return view('auth.account.myhoursused', compact('lessonhours'));
-      
     }
     
     public function playershow(Players $players, Packages $packages)
