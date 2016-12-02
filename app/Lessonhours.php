@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Lessonhours extends Model
 {
@@ -26,4 +27,9 @@ class Lessonhours extends Model
     }
     
     protected $dates = ['signup_date'];
+    
+    public function setSignUpDateAttribute($value)
+    {
+        $this->attributes['signup_date'] = Carbon::createFromFormat('m/d/Y', $value);
+    }
 }

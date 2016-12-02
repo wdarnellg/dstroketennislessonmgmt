@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Hoursused extends Model
 {
@@ -16,4 +17,9 @@ class Hoursused extends Model
     }
     
     protected $dates = ['date_time'];
+    
+    public function setDateTimeAttribute($value)
+    {
+        $this->attributes['date_time'] = Carbon::createFromFormat('m/d/Y', $value);
+    }
 }
