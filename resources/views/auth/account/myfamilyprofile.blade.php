@@ -78,7 +78,7 @@
             <div class="row">
             <div class="form-group">
                 <label for="birthdate">Birthdate:</label>
-                <input class="form-control" type="text" name="birthdate" id="datepicker" placeholder="Please format M/D/Y"/>
+                <input class="form-control" type="text" name="birthdate" id="datepicker" placeholder="Please format m/d/yyyy"/>
             </div>
             </div>
             <input class="form-control" type="hidden" name="_token" value="{{ Session::token() }}"/>
