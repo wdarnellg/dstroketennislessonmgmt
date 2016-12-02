@@ -12,10 +12,10 @@
         <section>
             <h4>D`Stroke Tennis Administrator</h4>
             <article>
-             <form role="form" action="/users/{{ $families->id }}" method="post">
-                 {{ method_field('PATCH') }}
+             
                <div class="col-md-4">
-         <form role="form" action="users" method="post">
+         <form role="form" action="/users/{{ $families->id }}" method="post">
+                 {{ method_field('PATCH') }}
             <div class="row">
             <div class="form-group">
                 <label for="famname">User Name:</label>
@@ -24,6 +24,12 @@
             </div>
             <div class="row">
             <div class="form-group">
+                 <div class="row">
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input class="form-control" type="tel" name="phone" id="phone" value="{{ $families->phone }}"/>
+            </div>
+                
                 <!--<label for="email">User Email:</label>-->
                 <input class="form-control" type="hidden" name="email" id="email" value="{{ $families->email }}"/>
             </div>
@@ -34,11 +40,7 @@
                 <input class="form-control" type="hidden" name="password" id="password" value="{{ $families->password }}"/>
             </div>
             </div>
-            <div class="row">
-            <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input class="form-control" type="tel" name="phone" id="phone" value="{{ $families->phone }}"/>
-            </div>
+           
             </div>
             <div class="row">
                 <button type="submit" class="btn btn-default">Update Family</button>

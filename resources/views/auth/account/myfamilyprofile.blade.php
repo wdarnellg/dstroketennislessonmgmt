@@ -31,6 +31,7 @@
                                     <li class="list-group-item">
                                         No members added
                                     </li>
+                                @endif    
                                 @foreach($families->players as $player)
                                     <a href="/players/{{ $player->id }}"> 
                                         <li class="list-group-item card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
@@ -77,7 +78,7 @@
             <div class="row">
             <div class="form-group">
                 <label for="birthdate">Birthdate:</label>
-                <input class="form-control" type="text" name="birthdate" id="datepicker" placeholder="Birthdate"/>
+                <input class="form-control" type="text" name="birthdate" id="datepicker" placeholder="Please format M/D/Y"/>
             </div>
             </div>
             <input class="form-control" type="hidden" name="_token" value="{{ Session::token() }}"/>

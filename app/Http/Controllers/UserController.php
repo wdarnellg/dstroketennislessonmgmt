@@ -50,9 +50,9 @@ class UserController extends Controller
         return view('admin.user.edit', compact('user'));
     }
     
-    public function update(Request $request, user $user)
+    public function update(Request $request, User $families)
     {
-       if($user->update($request->all())) {
+       if($families->update($request->all())) {
                return back()->with(['success' => 'user successfully edited.']);
         } else {
             return back()->with(['fail' => 'The attempt to edit failed.']);
