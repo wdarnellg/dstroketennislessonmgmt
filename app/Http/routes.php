@@ -30,17 +30,19 @@
 
 //User - Family Routes//////////////////////////////////////////////////////////////////
    Route::get('/users', 'AdminController@getusers')->middleware('admin');
-   Route::get('/users/{families}', 'AdminController@showfamily')->middleware('admin');
+   Route::get('/users/{families}', 'AdminController@showfamily')->middleware('auth');
    Route::get('/users/{families}/familyedit', 'AdminController@FamilyEdit')->middleware('admin');
    Route::post('/users', 'AdminController@storeUser')->middleware('admin');
    Route::post('/users/{families}/players', 'AdminController@storePlayer')->middleware('admin');
-   Route::patch('/users/{families}', 'AdminController@FamilyUpdate')->middleware('admin');
+   Route::patch('/users/{families}', 'UserController@update')->middleware('admin');
 //End User - Family Routes///////////////////////////////////////////////////////////////
 
 //Players Routes/////////////////////////////////////////////////////////////////////////
     Route::get('players', 'AdminController@getPlayers')->middleware('admin');
     Route::get('/players/{players}', 'AdminController@playershow')->middleware('admin');
+    Route::get('/players/{player}/playeredit', 'PlayerController@edit')->middleware('admin');
     Route::post('/players/{players}/lessonhours', 'AdminController@storeLessonHours')->middleware('admin');
+    Route::patch('/players/{player}', 'PlayerController@update')->middleware('admin');
 //End Players Routes/////////////////////////////////////////////////////////////////////
 
 //Lessonhours Routes/////////////////////////////////////////////////////////////////////
@@ -52,6 +54,6 @@
 //Accounts Routes/////////////////////////////////////////////////////////////////////////
     Route::get('/mylessonhours', 'PlayerController@getMyLessonhours')->middleware('auth');
     Route::get('/mylessonhours/{lessonhours}', 'PlayerController@getMyHoursused')->middleware('auth');
-    Route::get('/myfamilyprofile', 'UserController@getMyFamilyProfile');
-    Route::post('/myfamilyprofile/{families}/players', 'UserController@storePlayer');
+    Route::get('/myfamilyprofile', 'UserController@getMyFamilyProfile')->middleware('auth');
+    Route::post('/myfamilyprofile/{families}/players', 'UserController@storePlayer')->middleware('auth');
 //End Accounts Routes//////////////////////////////////////////////////////////////////////

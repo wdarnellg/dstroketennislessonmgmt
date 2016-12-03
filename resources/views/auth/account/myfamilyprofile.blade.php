@@ -20,8 +20,6 @@
                         
                         <li class="list-group-item">
                             <h3>Family: {{ $families->famname }}</h3>
-                            <a href="/users/{{ $families->id }}/familyedit" class="btn btn-default btn-sm pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            Edit {{ $families->famname }} </a>
                             
                            <p>{{ $families->phone }}</p> 
                            <p>{{ $families->email }}</p>
@@ -32,8 +30,10 @@
                                         No members added
                                     </li>
                                 @endif    
-                                @foreach($families->players as $player)
-                                    <a href="/players/{{ $player->id }}"> 
+                                @foreach(array_chunk($families->players->getCollection->all(), 1) as $row)
+                                    <div class="row">
+                                        @foreach($row as $player)
+                                    <a href="/mylessonhours"> 
                                         <li class="list-group-item card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
                                             {{ $player->getFullName($player->id) }}<br>
                                             {{ $player->gender }}<br>
@@ -41,6 +41,9 @@
                                         </li>
                                     </a>
                                 @endforeach
+                                    </div>
+                                    
+                            @endforeach
                             </ul>
                         </li>
             </ul>

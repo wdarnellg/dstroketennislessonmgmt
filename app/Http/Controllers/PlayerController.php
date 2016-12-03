@@ -99,15 +99,15 @@ class PlayerController extends Controller
     
     public function edit(Players $player)
     {
-        return view('admin.player.edit', compact('player'));
+        return view('admin.players.playeredit', compact('player'));
     }
     
     public function update(Request $request, Players $player)
     {
        if($player->update($request->all())) {
-        return back()->with(['success' => 'Player is enrolled in new Lesson Hour Session.']);
+        return back()->with(['success' => 'Player has been edited.']);
         } else {
-            return back()->with(['fail' => 'The attempt to enroll has failed.']);
+            return back()->with(['fail' => 'The attempt to edit has failed.']);
         }
     }
     

@@ -14,14 +14,15 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{ url('/dashboard') }}">Dashboard <span class="sr-only">(current)</span></a></li>
-        <li><a href="{{ url('users') }}">Families</a></li>
-            <li><a href="{{ url('packageform') }}">Packages</a></li>
-            <li><a href="{{ url('players') }}">Players</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lesson Mgmt <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            
+            <li><a href="{{ url('users') }}">Families</a></li>
+            <li><a href="{{ url('players') }}">Players</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ url('packageform') }}">Packages</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ url('/dashboard') }}">Dashboard <span class="sr-only">(current)</span></a></li>
           </ul>
         </li>
       </ul>
@@ -32,21 +33,17 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-        @else
+        
+        <li><a href="#">{{ Auth::user()->email }}</a></li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                {{ Auth::user()->email }} <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="#">Profile</a></li>
-            </ul>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="true">View <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url('myfamilyprofile') }}">Family Profile</a></li>
+            <li><a href="{{ url('mylessonhours') }}">Lesson Hours</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ url('/logout') }}">Logout</a></li>
+          </ul>
         </li>
-        <li><a href="{{ url('/logout') }}">Logout</a></li>
-
-        @endif
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

@@ -19,7 +19,7 @@
                         <li class="list-group-item">
                           <h3>{{ $players->getFullName($players->id) }}</h3>  
                             {{ $players->gender }}<br>
-                            <a href="/players/{{ $players->id }}/edit" class="btn btn-default btn- pull-right">
+                            <a href="/players/{{ $players->id }}/playeredit" class="btn btn-default btn- pull-right">
                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
                                        Edit {{ $players->getFullName($players->id) }}</a>
                            Birthdate: {{ $players->birthdate->format('m-d-Y') }}<br>

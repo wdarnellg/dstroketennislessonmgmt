@@ -21,11 +21,10 @@
                         @foreach($players as $player)
                           <h3>{{ $player->getFullName($player->id) }}</h3>  
                             {{ $player->gender }}<br>
-                            <!--<a href="#" class="btn btn-default btn- pull-right">-->
-                            <!--           <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> -->
-                            <!--           Edit {{ $player->getFullName($player->id) }}</a>-->
                            Birthdate: {{ $player->birthdate->format('m-d-Y') }}<br>
                            Family: {{ $player->users->famname }}<br>
+                           <hr>
+                           
                            <hr>
                            <h4>Packages</h4>
                          <div class="card card-inverse text-xs-center" style="background-color: #abdef2; border-color: #8971e8;">
