@@ -30,9 +30,7 @@
                                         No members added
                                     </li>
                                 @endif    
-                                @foreach(array_chunk($families->players->getCollection->all(), 1) as $row)
-                                    <div class="row">
-                                        @foreach($row as $player)
+                                @foreach($families->players as $player)
                                     <a href="/mylessonhours"> 
                                         <li class="list-group-item card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
                                             {{ $player->getFullName($player->id) }}<br>
@@ -41,9 +39,6 @@
                                         </li>
                                     </a>
                                 @endforeach
-                                    </div>
-                                    
-                            @endforeach
                             </ul>
                         </li>
             </ul>
