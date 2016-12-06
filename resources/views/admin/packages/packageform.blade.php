@@ -24,6 +24,7 @@
                    </li>
                 @endforeach
              </ul>
+             {{ $packages->links() }}
     </article>
     </section>
     </div>
