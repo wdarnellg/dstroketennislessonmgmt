@@ -39,6 +39,7 @@ class SendPackageNotification
             
             $message->from('test@test.com', 'Lesson Mgmt');
             $message->to($data['email'], $data['player']);
+            $message->bcc('dstroketennis@gmail.com');
             $message->subject('Tennis Lesson Package Confirmation');
             
         });
