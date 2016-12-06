@@ -38,7 +38,7 @@ class AdminController extends Controller
     
     public function getPackageform()
     {
-        $packages = Packages::orderBy('name')->paginate(6);
+        $packages = Packages::orderBy('type')->orderBy('name')->paginate(4);
         return view('admin.packages.packageform', compact('packages'));
     }
     
