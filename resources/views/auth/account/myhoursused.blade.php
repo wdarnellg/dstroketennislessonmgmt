@@ -31,8 +31,8 @@
                                     </li>
                                     @else
                                     <li class="list-group-item card-inverse">
-                                        <h6>Hours Used: {{ $lessonhours->hoursused->sum('numberofhours') }}</h6>
-                                       <h6>Hours Remaining: {{ $lessonhours->packages->numberofhours - $lessonhours->hoursused->sum('numberofhours')  }}</h6>
+                                        <h4>Hours Used: {{ $lessonhours->hoursused->sum('numberofhours') }}</h4>
+                                       <h4>Hours Remaining: {{ $lessonhours->packages->numberofhours - $lessonhours->hoursused->sum('numberofhours')  }}</h4>
                                     </li>
                                         @foreach($lessonhours->hoursused as $hour)
                                         <li class="list-group-item card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">

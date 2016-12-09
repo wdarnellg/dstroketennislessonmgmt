@@ -11,14 +11,16 @@ use App\Packages;
 use App\Lessonhours;
 use App\Hoursused;
 use Illuminate\Support\Facades\Event;
+use Collective\Html\FormFacade;
 use App\Events\MessageSent;
 use App\Events\DStrokeMail;
 
 class AdminController extends Controller
 {
+    //User-FamilyPlayer functions///
     public function getusers()
     {
-         $users = User::orderBy('famname')->get();
+         $users = User::orderBy('famname')->paginate(5);
         return view('admin.users.users', compact('users'));
     }
     
@@ -36,58 +38,6 @@ class AdminController extends Controller
         }
     }
     
-    public function getPackageform()
-    {
-        $packages = Packages::orderBy('type')->orderBy('name')->paginate(4);
-        return view('admin.packages.packageform', compact('packages'));
-    }
-    
-    public function getplayers()
-    {
-        $players = Players::orderBy('lname')->get();
-        return view('admin.players.players', compact('players'));
-    }
-    
-    public function playershow(Players $players, Packages $packages)
-    {
-        $packages = Packages::all();
-        
-        return view('admin.players.playerprofile', compact('players'), compact('packages'));
-    }
-    
-    public function Lessonhoursshow(Lessonhours $lessonhours)
-    {
-        return view('admin.lessonhours.lessonhours', compact('lessonhours'));
-    }
-    
-    public function getLessonhours()
-    {
-        $lessonhours = Lessonhours::orderBy('signup_date', 'desc')->get();
-        
-        return view('admin.lessonhours.lessonhours', compact('lessonhours'));
-    }
-    
-    public function postCreatePackage(Request $request)
-    {
-        $this->validate($request, [
-                'name' => 'required',
-                'cost' => 'required|numeric',
-                'numberofhours' => 'required|numeric',
-                'type' => 'required'
-            ]);
-            $packages = new Packages();
-            $packages->name = $request['name'];
-            $packages->cost = $request['cost'];
-            $packages->numberofhours = $request['numberofhours'];
-            $packages->type = $request['type'];
-            
-            if($packages->save()){
-               return back()->with(['success' => 'Package successfully created!']); 
-            } else {
-                return back()->with(['fail' => 'Something went wrong!']);
-            }
-    }
-    
     public function showFamily(User $families)
     {
         return view('admin.users.familyshow', compact('families'));
@@ -98,7 +48,7 @@ class AdminController extends Controller
         return view('admin.user.user-profile', compact('user'));
     }
     
-       public function storeUser(Request $request)
+    public function storeUser(Request $request)
     {
         $this->validate($request, [
                 'famname' => 'required|unique:users',
@@ -119,6 +69,22 @@ class AdminController extends Controller
         }
             
     }
+    //End User-Family functions///
+    
+    //Player functions
+    
+    public function getplayers()
+    {
+            $players = Players::orderBy('lname')->paginate(10);
+            return view('admin.players.players', compact('players'));
+    }
+     
+    public function playershow(Players $players, Packages $packages)
+    {
+        $packages = Packages::all();
+        
+        return view('admin.players.playerprofile', compact('players'), compact('packages'));
+    }
     
     public function storePlayer(Request $request, User $families)
     {
@@ -138,6 +104,36 @@ class AdminController extends Controller
             return back()->with(['success' => 'Player successfully added.']);
         } else {
             return back()->with(['fail' => 'The attempt to save failed.']);
+        }
+    }
+    //End Player functions///
+    
+    //Lessonhours functions///
+    public function Lessonhoursshow(Lessonhours $lessonhours)
+    {
+        return view('admin.lessonhours.lessonhours', compact('lessonhours'));
+    }
+    
+    public function getLessonhours()
+    {
+        $lessonhours = Lessonhours::orderBy('signup_date', 'desc')->with('hoursused')->get();
+        
+        return view('admin.lessonhours.lessonhours', compact('lessonhours'));
+    }
+    
+    public function LessonhoursEdit(Lessonhours $lessonhours, Packages $packages)
+    {
+        $packages = Packages::orderBy('type')->orderBy('name')->get();
+        
+        return view('admin.lessonhours.lessonhoursedit', compact('lessonhours', 'packages'));
+    }
+    
+    public function LessonhoursUpdate(Request $request, Lessonhours $lessonhours)
+    { 
+        if($lessonhours->update($request->all())) {
+               return back()->with(['success' => 'Lessonhours successfully edited.']);
+        } else {
+            return back()->with(['fail' => 'The attempt to edit failed.']);
         }
     }
     
@@ -161,8 +157,16 @@ class AdminController extends Controller
             return back()->with(['fail' => 'The attempt to enroll has failed.']);
         }
     }
+    //End Lessonhours functions
     
-    public function storeHoursUsed(Request $request, Lessonhours $lessonhours)
+    //Hoursused functions///
+    public function getHoursused()
+    {
+        $hoursused = Hoursused::orderBy('date_time', 'desc')->get();
+        return view('admin.hoursused.hoursused', compact('hoursused'));
+    }
+    
+    public function storeHoursused(Request $request, Lessonhours $lessonhours)
     { 
         $this->validate($request, [
             'date_time' => 'required',
@@ -181,4 +185,65 @@ class AdminController extends Controller
                 return back()->with(['fail' => 'Something went wrong!']);
             }
     }
+    
+    public function HoursusedEdit(Hoursused $hoursused)
+    {
+        return view('admin.hoursused.hoursusededit', compact('hoursused'));
+    }
+    
+    public function HoursusedUpdate(Request $request, Hoursused $hoursused)
+    {
+        if($hoursused->update($request->all())) {
+               return back()->with(['success' => 'Hoursused successfully edited.']);
+        } else {
+            return back()->with(['fail' => 'The attempt to edit failed.']);
+        }
+    }
+    //End Hoursused functions///
+    
+    //Packages functions///
+    
+    public function getPackageform()
+    {
+        $packages = Packages::orderBy('type')->orderBy('name')->paginate(4);
+        return view('admin.packages.packageform', compact('packages'));
+    }
+    
+    public function PackageEdit(Packages $packages)
+    { 
+        return view('admin.packages.packageedit', compact('packages'));
+    }
+    
+    public function PackageUpdate(Request $request, Packages $packages)
+    { 
+        if($packages->update($request->all())) {
+               return back()->with(['success' => 'Packages successfully edited.']);
+        } else {
+            return back()->with(['fail' => 'The attempt to edit failed.']);
+        }
+    }
+    
+    public function postCreatePackage(Request $request)
+    {
+        $this->validate($request, [
+                'name' => 'required',
+                'cost' => 'required|numeric',
+                'numberofhours' => 'required|numeric',
+                'type' => 'required'
+            ]);
+            $packages = new Packages();
+            $packages->name = $request['name'];
+            $packages->cost = $request['cost'];
+            $packages->numberofhours = $request['numberofhours'];
+            $packages->type = $request['type'];
+            
+            if($packages->save()){
+               return back()->with(['success' => 'Package successfully created!']); 
+            } else {
+                return back()->with(['fail' => 'Something went wrong!']);
+            }
+    }
+    
+    //EndPackages functions
+    
 }

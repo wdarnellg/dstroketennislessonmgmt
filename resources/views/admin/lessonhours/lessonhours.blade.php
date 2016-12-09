@@ -10,16 +10,26 @@
         <div class="col-md-1 col-sm-1"></div>
         <div class="col-md-4 col-sm-5">
     @include('includes.info-box')
-        <h4>Lesson Package Details</h4>
+        <div class="row">
+            <h5><a class="pull-right" href="/players/{{ $lessonhours->players_id }}">Player Profile</a></h5>
+            <h4>Lesson Package Details</h4>
+        </div>
+        
             <div class="card card-inverse text-xs-center" style="background-color: #4286f4; border-color: #b5cbdd;">
+                
                 <div class="card-block">
                    <blockquote class="card-blockquote">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <h4>{{ $lessonhours->players->getFullName($lessonhours->players->id) }}</h4>
-                      <h5>Lesson Package:  {{ $lessonhours->packages->name }}</5>  <a href="#" class="btn btn-default btn-sm" style="float: right">View All Lessons</a>
+                      <h5>Lesson Package:  {{ $lessonhours->packages->name }}</h5>  
+                      <p class="pull-right">
+                            <a href="/lessonhours/{{ $lessonhours->id }}/lessonhoursedit" class="btn btn-default btn- pull-right">
+                           <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
+                           </a><br>
+                          </p>
                       <h5>Signup Date: {{ $lessonhours->signup_date->format('m-d-Y') }}</h5>
-                      <a href="/admin/lessonhours/lessonhours/{{ $lessonhours->id }}/edit" class="btn btn-default btn-sm pull-right">Edit Package</a>
+                          
                      
                       <h4>Hours Remaining: {{ $lessonhours->packages->numberofhours - $lessonhours->hoursused->sum('numberofhours')  }}</h4>
                             </li>
@@ -37,9 +47,9 @@
                                                 @else
                                                     @foreach($lessonhours->hoursused as $hour)
                                                     <li class="list-group-item card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
+                                                        <a href="/hoursused/{{ $hour->id }}/hoursusededit" class="btn btn-sm btn-default pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                                                        Lesson Date:  <strong>{{ $hour->date_time->format('D-M-d-Y') }}</strong><br>
                                                         Hours in lesson: {{ $hour->numberofhours }}<br>
-                                                        <a href="/admin/hoursused/{{ $hour->id }}/edit" class="btn btn-sm btn-default pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                                                         Comments:<br>
                                                         {{ $hour->comments }}
                                                     </li>

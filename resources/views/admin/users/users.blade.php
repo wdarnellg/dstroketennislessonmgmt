@@ -11,7 +11,6 @@
     <div class="col-md-4">
 @include('includes.info-box')
             <section>
-                <h4>D`Stroke Tennis Administrator</h4>
             <article>
             
             <h3>Families</h3>
@@ -23,6 +22,7 @@
                    </li>
                 @endforeach
              </ul>
+             {{ $users->links() }}
     </article>
    
     </section>

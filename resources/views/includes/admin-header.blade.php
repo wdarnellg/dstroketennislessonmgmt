@@ -2,6 +2,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
+      
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"  aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -9,8 +10,9 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="{{ url('/home') }}"><image src="{{ URL::asset('src/img/DStrokeLogoD.png') }}" alt="D`Stroke Tennis Logo" height="42px"></image></a>
+      
     </div>
-
+    
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
@@ -32,6 +34,7 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
+      <h4 class="navbar-header">Administration</h4>
       <ul class="nav navbar-nav navbar-right">
         
         <li><a href="#">{{ Auth::user()->email }}</a></li>

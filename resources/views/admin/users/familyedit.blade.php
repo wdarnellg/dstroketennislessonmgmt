@@ -11,6 +11,7 @@
 @include('includes.info-box')
         <section>
             <h4>D`Stroke Tennis Administrator</h4>
+            <h5><a href="/users/{{ $families->id }}">Family Profile</a></h5>
             <article>
              
                <div class="col-md-4">

@@ -23,23 +23,32 @@
                             
                            <p>{{ $families->phone }}</p> 
                            <p>{{ $families->email }}</p>
-                        
+                            
                              <ul class="list-group">
                                  @if(count($families->players) == 0)
                                     <li class="list-group-item">
                                         No members added
                                     </li>
-                                @endif    
-                                @foreach($families->players as $player)
-                                    <a href="/mylessonhours"> 
-                                        <li class="list-group-item card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
-                                            {{ $player->getFullName($player->id) }}<br>
-                                            {{ $player->gender }}<br>
-                                            {{ $player->birthdate->format('M-d-Y') }}<br>
-                                        </li>
-                                    </a>
-                                @endforeach
                             </ul>
+                                @endif   
+                                <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Family Member</th>
+                                        <th>Gender</th>
+                                        <th>Birthdate</th>
+                                    </tr>
+                                </thead>
+                                <tbody  class="card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
+                                @foreach($families->players as $player)
+                                <tr>
+                                    <td><a href="/mylessonhours"> {{ $player->getFullName($player->id) }}</a></td>
+                                    <td>{{ $player->gender }}</td>
+                                    <td>{{ $player->birthdate->format('m-d-Y') }}</td>
+                                </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </li>
             </ul>
                 </blockquote>

@@ -19,6 +19,9 @@
                     <li class="list-group-item">
                       Package: {{ $package->name }}<br>
                       Number of Hours: {{ $package->numberofhours }}<br>
+                      <a href="/packageform/{{ $package->id }}/packageedit" class="btn btn-default btn- pull-right">
+                                       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
+                                       Edit {{ $package->name }}</a>
                       Type: {{ $package->type }}<br>
                       Cost: ${{ $package->cost }}.00
                    </li>

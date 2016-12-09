@@ -23,8 +23,9 @@
     Route::get('/dashboard', 'HomeController@admin')->middleware('admin');
     Route::auth();
     Route::get('/packageform', 'AdminController@getPackageform')->middleware('admin');
+    Route::get('/packageform/{packages}/packageedit', 'AdminController@PackageEdit')->middleware('admin');
     Route::post('/packageform', 'AdminController@postCreatePackage')->middleware('admin');
-
+    Route::patch('/packageform/{packages}', 'AdminController@PackageUpdate')->middleware('admin');
 //End Admin Routes//////////////////////////////////////////////////////////////////////
 
 
@@ -48,8 +49,15 @@
 //Lessonhours Routes/////////////////////////////////////////////////////////////////////
     Route::get('/lessonhours/', 'AdminController@getLessonHours')->middleware('admin');
     Route::get('/lessonhours/{lessonhours}', 'AdminController@Lessonhoursshow')->middleware('admin');
-    Route::post('/lessonhours/{lessonhours}/hoursused', 'AdminController@storeHoursUsed')->middleware('admin');
-//End Lessonhours Routes//////////////////////////////////////////////////////////////////
+    Route::get('/lessonhours/{lessonhours}/lessonhoursedit', 'AdminController@LessonhoursEdit')->middleware('admin');
+    Route::post('/lessonhours/{lessonhours}/hoursused', 'AdminController@storeHoursused')->middleware('admin');
+    Route::patch('/lessonhours/{lessonhours}', 'AdminController@LessonhoursUpdate')->middleware('admin');
+//End Lessonhours Routes
+
+//Hoursused Routes/////////////////////////////////////////////////////////////////////
+    Route::get('/hoursused/{hoursused}/hoursusededit', 'AdminController@HoursusedEdit')->middleware('admin');
+    Route::patch('/hoursused/{hoursused}', 'AdminController@HoursusedUpdate')->middleware('admin');
+//End Hoursused Routes//////////////////////////////////////////////////////////////////
 
 //Accounts Routes/////////////////////////////////////////////////////////////////////////
     Route::get('/mylessonhours', 'PlayerController@getMyLessonhours')->middleware('auth');

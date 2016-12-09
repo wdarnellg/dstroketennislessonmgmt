@@ -10,8 +10,13 @@
     <div class="col-md-1 col-sm-1"></div>
     <div class="col-md-4 col-sm-5">
 @include('includes.info-box')
+                
             <section>
-                <h5>D`Stroke Tennis Administrator</h5>
+                <div class="row">
+                    <h5><a class="pull-right" href="/users">Family List</a></h5><br>
+                    <h5><a class="pull-right" href="/players">Player List</a></h5>
+                    <h4>Family Profile</h4>
+                </div>
             <div class="card card-inverse text-xs-center" style="background-color: #4286f4; border-color: #b5cbdd;">
                 <div class="card-block">
                    <blockquote class="card-blockquote">

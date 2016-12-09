@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-1 col-sm-1"></div>
-    <div class="col-md-4 col-sm-5">
+    <div class="col-md-6 col-sm-5">
 @include('includes.info-box')
             <section>
                 <h4>Player Profile</h4>
@@ -31,24 +31,34 @@
                         <div class="card-block">
                        <blockquote class="card-blockquote">                  
                             <ul class="list-group">
-                                @if(count($lessonhours) == 0)
+                                @if(count($player->lessonhours) == 0)
                                     <li class="list-group-item">
                                         No Lesson Records
                                     </li>
+                            </ul>
                                     @else
-                                        @foreach($lessonhours as $hours)
-
-                                        <li class="list-group-item card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
-                                            Sign Up Date:<br>
-                                            {{ $hours->signup_date->format('m-d-Y') }}<br>
-                                            <a href="/mylessonhours/{{$hours->id}}" class="pull-right"> Hours Remaining: {{ $hours->packages->numberofhours - $hours->hoursused->sum('numberofhours') }}</a>
-                                            Lesson Package Type:<br>
-                                            {{ $hours->packages->name }}<br>
-                                        </li>
-                                        @endforeach
-                                @endif
+                                    <table class="table table-striped card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
+                                        <thead>
+                                            <tr>
+                                                <th>Signup Date</th>
+                                                <th>Package</th>
+                                                <th>Hours Left</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           @foreach($player->lessonhours as $hours) 
+                                           <tr>
+                                               <td>{{ $hours->signup_date->format('m/d/Y') }}</td>
+                                               <td>{{ $hours->packages->name }}<br>
+                                                   <a href="/mylessonhours/{{$hours->id}}">Package Details</a>
+                                                </td>
+                                               <td>{{ $hours->packages->numberofhours - $hours->hoursused->sum('numberofhours') }}</td>
+                                           </tr>
+                                           @endforeach
+                                        </tbody>
+                                    </table>
+                                    @endif
                                     
-                                </ul>
                         </blockquote>
                     </div>
                     </div>     
@@ -56,7 +66,7 @@
                         @endforeach
                         </li>
                         </ul>
-                     
+                     {{ $players->links() }}
                     </blockquote>
                     
                 </div>

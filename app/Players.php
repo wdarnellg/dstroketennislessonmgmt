@@ -21,7 +21,7 @@ class Players extends Model
     {
         return $this->hasMany('App\Lessonhours', 'players_id');
     }
-    
+
     public function getFullName($id)
     {
         return ucfirst($this->fname ) . ' ' . ucfirst($this->lname);

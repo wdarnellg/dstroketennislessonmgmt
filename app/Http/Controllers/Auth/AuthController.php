@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Mail;
+
 
 class AuthController extends Controller
 {
@@ -70,5 +72,15 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        
+        Mail::send('registration.welcome', $data, function($message) use ($data)
+            {
+                $message->from('pleaseDONTreply@dstroketennis.com', "DStroke Tennis");
+                $message->subject("Thank You From DStroke Tennis");
+                $message->to($data['email']);
+            });
+             
+            return $user;
+
     }
 }

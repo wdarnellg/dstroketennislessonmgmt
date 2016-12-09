@@ -6,7 +6,9 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "genealabs/laravel-caffeine": "^0.3.12",
+        "laravelcollective/html": "~5.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

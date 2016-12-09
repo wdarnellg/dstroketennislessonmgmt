@@ -34,12 +34,12 @@ class PlayerController extends Controller
     {
         //$packages = Packages::all();
        
-        $lessonhours = Lessonhours::whereHas('players', function($q)
-        {
-            $q->where('users_id', '=', Auth::user()->id);
-        })->orderBy('signup_date', 'desc')->with('players')->get(); 
+        //$lessonhours = Lessonhours::whereHas('players', function($q)
+        //{
+        //    $q->where('users_id', '=', Auth::user()->id);
+        //})->orderBy('signup_date', 'desc')->with('players')->get(); 
         
-         $players = Players::where('users_id', '=', Auth::user()->id)->with('lessonhours.hoursused','lessonhours.packages', 'users')->get(); 
+         $players = Players::where('users_id', '=', Auth::user()->id)->with('lessonhours.hoursused','lessonhours.packages', 'users')->paginate(1);
         return view('auth.account.mylessonhours', compact('players'), compact('lessonhours'));
     }
     

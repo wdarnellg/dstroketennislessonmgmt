@@ -10,9 +10,14 @@
     <div class="col-md-1 col-sm-1"></div>
     <div class="col-md-4 col-sm-5">
 @include('includes.info-box')
-            <section>
-                <h4>Player Profile</h4>
+                <div class="row">
+                    <h4><a class="pull-right" href="/users/{{ $players->users_id }}">Family</a></h4>
+                    <h4>Player Profile</h4>
+                </div>
+            <section> 
+            
             <div class="card card-inverse text-xs-center" style="background-color: #4286f4; border-color: #b5cbdd;">
+                
                 <div class="card-block">
                    <blockquote class="card-blockquote">
                     <ul class="list-group">
@@ -38,17 +43,21 @@
                                                 @else
                                                 
                                                     @foreach($players->lessonhours as $hours)
-                                                    <a href="/lessonhours/{{ $hours->id }}"> 
+                                                     
                                                     <li class="list-group-item card-inverse"  style="background-color: #f9f8de; border-color: #ccba6c;">
+                                                        <a href="/lessonhours/{{ $hours->id }}">
                                                         Sign Up Date:<br>
                                                         {{ $hours->signup_date->format('m-d-Y') }}<br>
+                                                        
                                                         <p class="pull-right">
                                                             Hours Left: {{ $hours->packages->numberofhours - $hours->hoursused->sum('numberofhours') }}
+                                                        </a>
+                                                          
                                                         </p>
                                                         Lesson Package Type:<br>
                                                         {{ $hours->packages->name }}<br>
                                                     </li>
-                                                    </a>
+                                                    
                                                     @endforeach
                                             @endif
                                                 
@@ -61,14 +70,16 @@
                     </blockquote>
                 </div>
             </div>
+            
     </section>
     </div>
+    <div class="col-md-1 col-sm-1"></div>
     <div class="col-md-4 col-sm-5">
            <form role="form" action="/players/{{ $players->id }}/lessonhours" method="POST">
             <div class="row">
             <div class="form-group">
                 <label for="signup_date">Sign Up Date:</label>
-                <input class="form-control" type="text" name="signup_date" id="datepicker" placeholder="Sign Up Date" value="{{ Request::old('signup_date') }}"/>
+                <input class="form-control" type="text" name="signup_date" id="datepicker" placeholder="Sign Up Date" />
             </div>
             </div>
             <div class="row">

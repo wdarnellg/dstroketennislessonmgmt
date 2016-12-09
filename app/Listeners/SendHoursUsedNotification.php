@@ -40,7 +40,7 @@ class SendHoursUsedNotification
             
              Mail::send('admin.email.hoursusednotification', $data, function($message) use ($data){
             
-            $message->from('test@test.com', 'Lesson Mgmt');
+            $message->from('dstroketennis@gmail.com', 'Lesson Mgmt');
             $message->to($data['email'], $data['player']);
             $message->bcc('dstroketennis@gmail.com');
             $message->subject('Lesson Package Update');

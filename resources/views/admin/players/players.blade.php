@@ -11,21 +11,33 @@
     <div class="col-md-4">
 @include('includes.info-box')
         <h4>Main Player List</h4>
-            <article>
+    <article>
             
         @if(count($players) == 0)
             No Player Records
        @else
-    <ul class="list-group">
-        @foreach($players as $player)
-            <li class="list-group-item">
-                <a href="/players/{{ $player->id }}">{{ $player->getFullName($player->id) }}</a>
-                <p> Number of Packages: {{ $player->lessonhours->count('players') }}</p><br>
-                
-            </li>
-        @endforeach
-        </ul>         
+       <table class="table">
+           <thead>
+               <tr>
+                   <th>Name</th>
+                   <th>Number of Packages</th>
+               </tr>
+           </thead>
+           <tbody>
+            @foreach($players as $player)
+            <tr>
+                <td>
+                    <a href="/players/{{ $player->id }}">{{ $player->getFullName($player->id) }}</a><br>
+                </td>
+                <td>
+                    {{ $player->lessonhours->count('players') }}
+                </td>
+            </tr>
+            @endforeach
+           </tbody>
+       </table>        
     @endif
+    {{ $players->links() }}
     </article>
     </section>
     </div>
